@@ -39,8 +39,10 @@ export default function Image ( ) {
       } else {
         return Promise.reject(response);
       }
-    }).then((json) => {
-      setUser(json)
+    })
+    .then(function (userData) {
+      setUser(userData)
+      return
     })
     .catch(function (error) {
       console.warn(error);

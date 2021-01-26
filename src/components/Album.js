@@ -1,61 +1,85 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css'
-import { Link, useParams } from "react-router-dom"
+import ReactPaginate from "react-paginate"
+import {
+  BrowserRouter as Router,
+  Link, useParams
+} from "react-router-dom"
 
-export default function Album ( ) {
-    const id = useParams().id
-    const [images, setImages] = useState([])
-    const [pageNumber, setPageNumber] = useState(1)
-    const [postNumber] = useState(16)
-    const [maxPages, setMaxPages] = useState(0)
-    const [imagesTotal, setImagesTotal] = useState(0)
+export default function Album () {
+  const id = useParams().id
+  const [currentPage, setCurrentPage] = useState(0);
+  const [data, setData] = useState([]);
+  const [album, setAlbum] = useState([]);
+  const PER_PAGE = 16;
+  const offset = currentPage * PER_PAGE;
+  const currentPageData = data.slice(offset, offset + PER_PAGE);
+  const pageCount = Math.ceil(data.length / PER_PAGE);
 
-    const currentPageNumber = (pageNumber * postNumber) - postNumber  
-    const paginatedImages = images.splice(currentPageNumber, postNumber)
+  useEffect(() => {
+    fetchData();
+  }, []);
+  function fetchData() {
+    fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject(response);
+      }
+    })
+    .then(function (imageData) {
+      setData(imageData)
+      return fetch(`https://jsonplaceholder.typicode.com/albums/${id}`);
+    })
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        return Promise.reject(response);
+      }
+    })
+    .then(function (albumData) {
+      setAlbum(albumData)
+    })
+    .catch(function (error) {
+      console.warn(error);
+    });
+  }
 
-    const handlePrev = () => {
-      setPageNumber(pageNumber - 1)
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
-    }
+  function handlePageClick({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
 
-    const handleNext = () => {
-      setPageNumber(pageNumber + 1)
-      window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
-    }
-
-    useEffect (() => {
-      fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
-      .then((response) => response.json())
-      .then((json) => {
-        setImages(json)
-        setImagesTotal(json.length)
-        setMaxPages(Math.ceil(json.length/postNumber))
-      });
-    }, [])
-
-    return (
-      <div className="galleryWrapper">
-        <Link to={'/'}>
-          <button className="btn">Back to album listing</button>
-        </Link>
-        <h1>Image Album</h1>
-        <h2 style={{ marginTop: 0, textAlign: 'center' }}>Title: </h2>
-        <p className="black-text" style={{ textAlign: 'center' }}>{imagesTotal} images in total</p>
-        <div className="cardWrapper">
-          {paginatedImages.map((image)=>(
-            <div key={image.id} className="imageCard">
-              <div className="imageCardBg" style={{ backgroundImage: `url(${image.thumbnailUrl})`}}></div>
-              <Link to={`/image/${image.id}`}><h3>{image.title}</h3></Link>
-            </div>
-          ))}
-        </div>
-        <div className="pagination">
-          <p className="white-text">Page {pageNumber} / {maxPages}</p>
-          <div>
-            <button className="btn" onClick={handlePrev} disabled={pageNumber === 1}>prev</button>
-            <button className="btn" onClick={handleNext} disabled={pageNumber === maxPages}>next</button>
+  return (
+    <div className="galleryWrapper">
+      <Link to={'/'}>
+        <button className="btn">Back to album listing</button>
+      </Link>
+      <h1>Image Album</h1>
+      <h2 style={{ marginTop: 0, textAlign: 'center' }}>Title: {album.title}</h2>
+      <p className="black-text" style={{ textAlign: 'center' }}>{data.length} images in total</p>
+      <div className="cardWrapper">
+        {currentPageData.map((image)=>(
+          <div key={image.id} className="imageCard">
+            <div className="imageCardBg" style={{ backgroundImage: `url(${image.thumbnailUrl})`}}></div>
+            <Link to={`/image/${image.id}`}><h3>{image.title}</h3></Link>
           </div>
-        </div>
+        ))}
       </div>
-    );
+      <div className="pagination">
+        <ReactPaginate
+          previousLabel={"← Previous"}
+          nextLabel={"Next →"}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagination__link"}
+          nextLinkClassName={"pagination__link"}
+          disabledClassName={"pagination__link--disabled"}
+          activeClassName={"pagination__link--active"}
+        />
+      </div>
+    </div>
+  );
 }
