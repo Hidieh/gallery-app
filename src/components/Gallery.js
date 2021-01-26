@@ -1,7 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css'
+import {
+  BrowserRouter as Router,
+  Switch, Route, Link, useParams
+} from "react-router-dom"
 
-export default function Album ( id ) {
+export default function Gallery ( ) {
     const [albums, setAlbums] = useState([])
     const [pageNumber, setPageNumber] = useState(1)
     const [postNumber] = useState(15)
@@ -26,13 +30,15 @@ export default function Album ( id ) {
       });
     })
 
+    console.log(albums.length)
+
     return (
       <div className="galleryWrapper">
         <h1>All Image Albums</h1>
         <div className="cardWrapper">
           {paginatedAlbums.map((album)=>(
             <div key={album.id} className="imageCard">
-              <h3>{album.title}</h3>
+              <h3><Link to={`/album/${album.id}`}>{album.title}</Link></h3>
               <h3>Owner: {album.userId}</h3>
             </div>
           ))}

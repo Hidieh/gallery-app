@@ -1,21 +1,19 @@
 import React, {useState, useEffect} from 'react'
 import '../App.css'
+import { Link, useParams } from "react-router-dom"
 
-export function GetAlbumInfo () {
+export function GetAlbumInfo ( id ) {
   const [album, setAlbum] = useState([])
-  fetch(`https://jsonplaceholder.typicode.com/albums/1`)
+  fetch(`https://jsonplaceholder.typicode.com/albums/${id.id}`)
     .then((response) => response.json())
     .then((json) => {
       setAlbum(json)
     });
-  return (
-    <>
-      {album.title}
-    </>
-  )
+  return (<>{album.title}</> )
 }
 
-export default function Album ( id ) {
+export default function Album ( ) {
+    const id = useParams().id
     const [images, setImages] = useState([])
     const [pageNumber, setPageNumber] = useState(1)
     const [postNumber] = useState(15)
@@ -42,9 +40,11 @@ export default function Album ( id ) {
 
     return (
       <div className="galleryWrapper">
-        <button className="btn">Back to album listing</button>
+        <Link to={'/'}>
+          <button className="btn">Back to album listing</button>
+        </Link>
         <h1>Image Album</h1>
-        <h2 style={{ marginTop: 0}}>Title: <GetAlbumInfo /></h2>
+        <h2 style={{ marginTop: 0}}>Title: <GetAlbumInfo id={id} /></h2>
         <div className="cardWrapper">
           {paginatedImages.map((image)=>(
             <div key={image.id} className="imageCard">
