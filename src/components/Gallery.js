@@ -8,8 +8,9 @@ import {
 export default function Gallery ( ) {
     const [albums, setAlbums] = useState([])
     const [pageNumber, setPageNumber] = useState(1)
-    const [postNumber] = useState(15)
-    const maxPages = Math.ceil(albums.length / 15)
+    const [postNumber] = useState(16)
+    const maxPages = Math.ceil(albums.length / postNumber)
+    const [albumsTotal, setAlbumsTotal] = useState()
 
     const currentPageNumber = (pageNumber * postNumber) - postNumber  
     const paginatedAlbums =  albums.splice(currentPageNumber, postNumber)
@@ -30,23 +31,23 @@ export default function Gallery ( ) {
       .then((response) => response.json())
       .then((json) => {
         setAlbums(json)
+        setAlbumsTotal(json.length)
       });
-    })
+    }, [])
 
     return (
       <div className="galleryWrapper">
         <h1>All Image Albums</h1>
-        <p style={{ textAlign: 'center' }}>{albums.length} albums in total</p>
+        <p className="black-text" style={{ textAlign: 'center' }}>{albumsTotal} albums in total</p>
         <div className="cardWrapper">
           {paginatedAlbums.map((album)=>(
             <div key={album.id} className="imageCard">
               <h3 style={{ textAlign: 'center'}}><Link to={`/album/${album.id}`}>{album.title}</Link></h3>
-              {/*<p>Owner: {album.userId}</p>*/}
             </div>
           ))}
         </div>
         <div className="pagination">
-          Page {pageNumber} / {maxPages}
+          <p className="white-text">Page {pageNumber} / {maxPages}</p>
           <div>
             <button className="btn" onClick={handlePrev} disabled={pageNumber === 1}>prev</button>
             <button className="btn" onClick={handleNext} disabled={pageNumber === maxPages}>next</button>

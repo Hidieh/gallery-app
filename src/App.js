@@ -1,15 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import './App.css'
 import Gallery from './components/Gallery'
 import Album from './components/Album'
 import Image from './components/Image'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link, useParams
+  Switch, Route
 } from "react-router-dom"
 
 function App() {
-  const [albumId, setAlbumId] = useState(1);
   return (
     <Router>
       <div>

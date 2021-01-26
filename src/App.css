@@ -7,6 +7,51 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+h1 {
+  color: rgba(255,255,255,0.6);
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+  0px -5px 35px rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 3rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+h2 {
+  color: rgba(255,255,255,0.6);
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+  0px -5px 35px rgba(255,255,255,0.3);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+a {
+  color: rgba(0,0,0,.5);
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+  0px -5px 35px rgba(255,255,255,0.3);
+  text-decoration: none;
+  transition: all .05s ease-in-out 0s;
+}
+
+a:hover {
+  color: rgba(0,0,0,.75);
+}
+
+.white-text {
+  color: rgba(255, 255, 255, .5);
+  text-transform: uppercase;
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+  0px -5px 35px rgba(255,255,255,0.3);
+}
+
+.black-text {
+  color: rgba(0,0,0, .5);
+  text-transform: uppercase;
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+  0px -5px 35px rgba(255,255,255,0.3);
+}
+
 .btn {
   border: 0;
   border-radius: 1rem;
@@ -67,7 +112,7 @@ body {
 
 .imageCard {
   margin: 1%;
-  flex: 31%;
+  flex: 23%;
   background: rgba(255, 255, 255, .2);
   backdrop-filter: blur(50px);
   box-sizing: border-box;
@@ -86,39 +131,33 @@ body {
   background-size: cover;
   background-position: center center;
   border-radius: 1rem 1rem 0 0;
+  opacity: .6;
+  transition: all .05s ease-in-out 0s;
 }
 
 .imageCard:hover .imageCardBg {
-  background-size: 110%;
+  opacity: 1;
 }
 
-h1 {
-  color: rgba(255,255,255,0.6);
-  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-  0px -5px 35px rgba(255,255,255,0.3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 3rem;
-  text-align: center;
-  font-weight: 700;
+.imageWrapper {
+  display: flex;
+  flex-wrap: wrap;
 }
 
-h2 {
-  color: rgba(255,255,255,0.6);
-  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-  0px -5px 35px rgba(255,255,255,0.3);
-  font-size: 2rem;
-  text-align: center;
-  font-weight: 700;
+.imageDiv {
+  flex: 48%;
+  padding: 1%;
 }
 
-a {
-  color: rgba(0,0,0,.5);
-  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-  0px -5px 35px rgba(255,255,255,0.3);
-  text-decoration: none;
+.imageDiv img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 1rem;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.15); 
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.15);
 }
 
-a:hover {
-  color: rgba(0,0,0,.75);
+.imageMeta {
+  flex: 48%;
+  padding: 1%;
 }
