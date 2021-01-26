@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
 body {
   background: url('bg.jpg') no-repeat 0px 0px;
   background-size: cover;
   background-attachment: fixed;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .btn {
@@ -18,9 +21,29 @@ body {
 }
 
 .btn:hover {
-  margin-top: -5px;
-  margin-bottom: 5px;
+  background: rgba(255, 255, 255, .6);
   transition: all .05s ease-in-out 0s;
+}
+
+.btn:disabled, .btn[disabled] {
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05); 
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, .1);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.pagination {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.pagination .btn {
+  margin-left: .5rem;
+  margin-right: .5rem;
+  margin-top: 1rem;
 }
 
 .galleryWrapper {
@@ -77,6 +100,7 @@ h1 {
   letter-spacing: 1px;
   font-size: 3rem;
   text-align: center;
+  font-weight: 700;
 }
 
 h2 {
@@ -85,4 +109,16 @@ h2 {
   0px -5px 35px rgba(255,255,255,0.3);
   font-size: 2rem;
   text-align: center;
+  font-weight: 700;
+}
+
+a {
+  color: rgba(0,0,0,.5);
+  text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+  0px -5px 35px rgba(255,255,255,0.3);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgba(0,0,0,.75);
 }

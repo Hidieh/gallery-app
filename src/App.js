@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './App.css'
 import Gallery from './components/Gallery'
 import Album from './components/Album'
+import Image from './components/Image'
 import {
   BrowserRouter as Router,
   Switch, Route, Link, useParams
@@ -19,6 +20,9 @@ function App() {
         <Switch>
           <Route path="/album/:id">
             <Album />
+          </Route>
+          <Route path="/image/:id">
+            <Image />
           </Route>
           <Route path="/">
             <Gallery />

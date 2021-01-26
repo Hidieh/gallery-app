@@ -9,6 +9,7 @@ export default function Gallery ( ) {
     const [albums, setAlbums] = useState([])
     const [pageNumber, setPageNumber] = useState(1)
     const [postNumber] = useState(15)
+    const maxPages = Math.ceil(albums.length / 15)
 
     const currentPageNumber = (pageNumber * postNumber) - postNumber  
     const paginatedAlbums =  albums.splice(currentPageNumber, postNumber)
@@ -16,10 +17,12 @@ export default function Gallery ( ) {
     const handlePrev = () => {
       if(pageNumber === 1) return
       setPageNumber(pageNumber - 1)
+      window.scrollTo(0, 0)
     }
 
     const handleNext = () => {
       setPageNumber(pageNumber + 1)
+      window.scrollTo(0, 0)
     }
 
     useEffect (() => {
@@ -30,23 +33,23 @@ export default function Gallery ( ) {
       });
     })
 
-    console.log(albums.length)
-
     return (
       <div className="galleryWrapper">
         <h1>All Image Albums</h1>
         <div className="cardWrapper">
           {paginatedAlbums.map((album)=>(
             <div key={album.id} className="imageCard">
-              <h3><Link to={`/album/${album.id}`}>{album.title}</Link></h3>
-              <h3>Owner: {album.userId}</h3>
+              <h3 style={{ textAlign: 'center'}}><Link to={`/album/${album.id}`}>{album.title}</Link></h3>
+              <p>Owner: {album.userId}</p>
             </div>
           ))}
         </div>
-        <div>Page {pageNumber} </div>
-        <div>
-          <button onClick={handlePrev}>prev</button>
-          <button onClick={handleNext}>next</button>
+        <div className="pagination">
+          Page {pageNumber} / {maxPages}
+          <div>
+            <button className="btn" onClick={handlePrev} disabled={pageNumber === 1}>prev</button>
+            <button className="btn" onClick={handleNext} disabled={pageNumber === maxPages}>next</button>
+          </div>
         </div>
       </div>
     );

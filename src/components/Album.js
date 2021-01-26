@@ -49,7 +49,7 @@ export default function Album ( ) {
           {paginatedImages.map((image)=>(
             <div key={image.id} className="imageCard">
               <div className="imageCardBg" style={{ backgroundImage: `url(${image.url})`}}></div>
-              <h3>{image.title}</h3>
+              <Link to={`/image/${image.id}`}><h3>{image.title}</h3></Link>
             </div>
           ))}
         </div>
