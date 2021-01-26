@@ -14,7 +14,7 @@ function App() {
     <Router>
       <div>
         <div>
-          <Link to="/">home</Link>
+          {/*<Link to="/">home</Link>*/}
         </div>
 
         <Switch>

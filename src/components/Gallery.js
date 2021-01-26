@@ -17,12 +17,12 @@ export default function Gallery ( ) {
     const handlePrev = () => {
       if(pageNumber === 1) return
       setPageNumber(pageNumber - 1)
-      window.scrollTo(0, 0)
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
     }
 
     const handleNext = () => {
       setPageNumber(pageNumber + 1)
-      window.scrollTo(0, 0)
+      window.scrollTo({top: 0, left: 0, behavior: 'smooth'})
     }
 
     useEffect (() => {
@@ -36,11 +36,12 @@ export default function Gallery ( ) {
     return (
       <div className="galleryWrapper">
         <h1>All Image Albums</h1>
+        <p style={{ textAlign: 'center' }}>{albums.length} albums in total</p>
         <div className="cardWrapper">
           {paginatedAlbums.map((album)=>(
             <div key={album.id} className="imageCard">
               <h3 style={{ textAlign: 'center'}}><Link to={`/album/${album.id}`}>{album.title}</Link></h3>
-              <p>Owner: {album.userId}</p>
+              {/*<p>Owner: {album.userId}</p>*/}
             </div>
           ))}
         </div>

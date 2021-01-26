@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react'
 import '../App.css'
 import { Link, useParams } from "react-router-dom"
 
-export function GetAlbumInfo ( id ) {
+export function GetAlbumInfo ( {id} ) {
   const [album, setAlbum] = useState([])
-  fetch(`https://jsonplaceholder.typicode.com/albums/${id.id}`)
+  fetch(`https://jsonplaceholder.typicode.com/albums/${id}`)
     .then((response) => response.json())
     .then((json) => {
       setAlbum(json)
@@ -26,18 +26,16 @@ export default function Image ( ) {
 
     return (
       <div className="galleryWrapper">
-        <Link to={'/'}>
+        <Link to={`/album/${image.albumId}`}>
           <button className="btn">Back to album</button>
         </Link>
         <h1>Image</h1>
-        <h2 style={{ marginTop: 0}}>Title: <GetAlbumInfo id={image.albumId} /></h2>
-        <div className="cardWrapper">
-          
-            <div key={image.id} className="imageCard">
-              <div className="imageCardBg" style={{ backgroundImage: `url(${image.url})`}}></div>
-              <h3>{image.title}</h3>
-            </div>
-          
+        <h2 style={{ marginTop: 0}}>Album title: <GetAlbumInfo id={image.albumId} /></h2>
+        <div className="imageWrapper">
+          <div key={image.id} className="imageCard">
+            <img src={image.url} alt="" />
+            <h3>{image.title}</h3>
+          </div>
         </div>
       </div>
     );
