@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom"
 
-export default function Gallery () {
+export default function Test () {
   const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState([]);
   const PER_PAGE = 16;
@@ -32,7 +32,7 @@ export default function Gallery () {
   return (
     <div className="galleryWrapper">
       <h1>All Image Albums</h1>
-      <p className="black-text" style={{ textAlign: 'center' }}>{data.length} albums in total</p>
+      <p className="black-text" style={{ textAlign: 'center' }}> albums in total</p>
       <div className="cardWrapper">
         {currentPageData.map((album)=>(
           <div key={album.id} className="imageCard">
