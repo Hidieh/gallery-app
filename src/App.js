@@ -1,9 +1,8 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './App.css'
 import Gallery from './components/Gallery'
 import Album from './components/Album'
 import Image from './components/Image'
-import Test from './components/Test'
 import {
   BrowserRouter as Router,
   Switch, Route
