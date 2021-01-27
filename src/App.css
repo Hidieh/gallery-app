@@ -76,19 +76,50 @@ a:hover {
   background: rgba(255, 255, 255, .1);
 }
 
-.btn:focus {
+.btn:focus, a:focus, li:focus {
   outline: none;
 }
 
 .pagination {
-  margin-top: 1.5rem;
+  display: block;
+  list-style-type: none;
+  margin: 1.5rem auto 0 auto;
+  padding: 0;
   text-align: center;
 }
 
-.pagination .btn {
-  margin-left: .5rem;
-  margin-right: .5rem;
-  margin-top: 1rem;
+.pagination li {
+  display: inline-block;
+}
+
+.pagination li a {
+  display: block;
+  border-radius: 2rem;
+  padding: .75rem 1rem;
+  margin: .25rem .5rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: rgba(0,0,0, .5);
+  letter-spacing: 1px;
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05); 
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, .4);
+}
+
+li.pagination__link--disabled a, li.break a {
+  -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05); 
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, .1);
+}
+
+.pagination li a:hover {
+  background: rgba(255, 255, 255, .6);
+  transition: all .05s ease-in-out 0s;
+}
+
+li.pagination__link--active a {
+  background: rgba(255, 255, 255, .8);
+  transition: all .05s ease-in-out 0s;
 }
 
 .galleryWrapper {
@@ -98,6 +129,7 @@ a:hover {
   max-width: 1100px;
   margin: 3rem auto;
   padding: 2rem;
+  box-sizing: border-box;
   border-radius: 1rem;
   -webkit-box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.15); 
   box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.15);
