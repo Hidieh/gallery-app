@@ -49,6 +49,7 @@ export default function Album () {
 
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
+    window.scrollTo(0,0);
   }
 
   return (

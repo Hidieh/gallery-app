@@ -2,7 +2,7 @@
 
 Simple Gallery App made with React. Fetches gallery data (albums, images and users) from http://jsonplaceholder.typicode.com/
 
-Has three components: Gallery, Album and Image.
+This application has three components: Gallery, Album and Image.
 
 Currently also runs on Heroku: https://gallery-app-hh.herokuapp.com/
 

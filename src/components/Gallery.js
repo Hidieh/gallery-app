@@ -27,6 +27,7 @@ export default function Gallery () {
 
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
+    window.scrollTo(0,0);
   }
 
   return (
